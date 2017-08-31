@@ -16,15 +16,28 @@
 
 
 window.findNRooksSolution = function(n) {
-  var solution = undefined; //fixme
+  var solution = new Board({'n': n});
+  for (var i = 0; i < n; i++) {
+    solution.togglePiece(i, i);
+  }
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
-  return solution;
+  return solution.rows();
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0;
+  
+  var fact = (n) => {
+    if (n === 1) {
+      return 1;
+    } else {
+      return n * fact(n - 1);
+    }
+  };
+  
+  solutionCount = fact(n);
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
@@ -32,10 +45,34 @@ window.countNRooksSolutions = function(n) {
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
-  var solution = undefined; //fixme
+  var solution = new Board({'n': n});
+  var queensPlaced = 0;
+  
+  var recursiveFindSolution = (currCol, currPiece) => {
+    if (currCol === n) {
+      return true;
+    } else {
+      for (var i = 0; i < n; i++) {
+        debugger;
+        if (!solution.hasAnyQueenConflictsOn(i, currCol)) {
+          solution.togglePiece(i, currCol);
+          console.log('Placed at row/col:', i, currCol);
+          if (!recursiveFindSolution(currCol + 1)) {
+            solution.togglePiece(i, currCol);
+            console.log('Removed at row/col:', i, currCol);
+          } else {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  };
+  
+  recursiveFindSolution(0, 0);
 
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
-  return solution;
+  return solution.rows();
 };
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
