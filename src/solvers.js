@@ -23,7 +23,7 @@
 
 */
 
-window.findNRooksSolution = function(n) {
+window.findNRooksSolution = (n) => {
   var solution = new Board({'n': n});
   for (var i = 0; i < n; i++) {
     solution.togglePiece(i, i);
@@ -34,7 +34,7 @@ window.findNRooksSolution = function(n) {
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
-window.countNRooksSolutions = function(n) {
+window.countNRooksSolutions = (n) => {
   var solutionCount = 0;
   
   var fact = (n) => {
@@ -52,7 +52,7 @@ window.countNRooksSolutions = function(n) {
 };
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
-window.findNQueensSolution = function(n) {
+window.findNQueensSolution = (n) => {
   var solution = new Board({'n': n});
   
   var recursiveFindSolution = (currCol) => {
@@ -82,7 +82,7 @@ window.findNQueensSolution = function(n) {
 
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
-window.countNQueensSolutions = function(n) {
+window.countNQueensSolutions = (n) => {
   var solutionCount = 0;
   var solution = new Board({'n': n});
   

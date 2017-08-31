@@ -78,7 +78,7 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
-    hasRowConflictAt: function(rowIndex) {
+    hasRowConflictAt(rowIndex) {
       for (var i = 0; i < this.get('n'); i++) {
         if (this.get(rowIndex)[i] === 1) {
           return true;
@@ -89,7 +89,7 @@
     },
 
     // test if any rows on this board contain conflicts
-    hasAnyRowConflicts: function() {
+    hasAnyRowConflicts() {
       var counter = 0;
       for (var row = 0; row < this.get('n'); row++) {
         //Searching through rows
@@ -114,7 +114,7 @@
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
-    hasColConflictAt: function(colIndex) {
+    hasColConflictAt(colIndex) {
       for (var i = 0; i < this.get('n'); i++) {
         if (this.get(i)[colIndex] === 1) {
           return true;
@@ -124,7 +124,7 @@
     },
 
     // test if any columns on this board contain conflicts
-    hasAnyColConflicts: function() {
+    hasAnyColConflicts() {
       var counter = 0;
       for (var col = 0; col < this.get('n'); col++) {
         //Searching through rows
@@ -149,7 +149,7 @@
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(index) {
+    hasMajorDiagonalConflictAt(index) {
       var currRow = 0;
       var currCol = index;
       var objsFound = 0;
@@ -170,7 +170,7 @@
     },
 
     // test if any major diagonals on this board contain conflicts
-    hasAnyMajorDiagonalConflicts: function() {
+    hasAnyMajorDiagonalConflicts() {
       //There will be n - 3 diagonals to check
       // debugger;
       //First-row index: passing in a col index
@@ -199,7 +199,7 @@
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
-    hasMinorDiagonalConflictAt: function(index) {
+    hasMinorDiagonalConflictAt(index) {
       var currRow = 0;
       var currCol = index;
       
@@ -215,7 +215,7 @@
     },
 
     // test if any minor diagonals on this board contain conflicts
-    hasAnyMinorDiagonalConflicts: function() {
+    hasAnyMinorDiagonalConflicts() {
       for (var i = this.get('n') + 1; i > 0; i--) {
         // if (this.hasMinorDiagonalConflictAt(i)) {
         //   return true;
@@ -242,7 +242,7 @@
 
   });
 
-  var makeEmptyMatrix = function(n) {
+  var makeEmptyMatrix = (n) => {
     return _(_.range(n)).map(function() {
       return _(_.range(n)).map(function() {
         return 0;
