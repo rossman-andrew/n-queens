@@ -13,7 +13,14 @@
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 
+/*
+  TIME COMPLEXITY OF SOLVER FUNCTIONS
+  
+  findNRooksSolution -- O(n) : linear
+  countNRooksSolution -- O(n) : linear
+  
 
+*/
 
 window.findNRooksSolution = function(n) {
   var solution = new Board({'n': n});
@@ -49,16 +56,13 @@ window.findNQueensSolution = function(n) {
   
   var recursiveFindSolution = (currCol) => {
     if (currCol === n) {
-      console.log('Reached end');
       return true;
     } else {
       for (var i = 0; i < n; i++) {
         if (!solution.hasAnyQueenConflictsOn(i, currCol)) {
           solution.togglePiece(i, currCol);
-          console.log('Placed at row/col:', i, currCol);
           if (!recursiveFindSolution(currCol + 1)) {
             solution.togglePiece(i, currCol);
-            console.log('Removed at row/col:', i, currCol);
           } else {
             return true;
           }
@@ -83,18 +87,14 @@ window.countNQueensSolutions = function(n) {
   
   var recursiveFindSolution = (currCol) => {
     if (currCol === n) {
-      console.log('Reached end');
-      // return true;
       solutionCount += 1;
       return false;
     } else {
       for (var i = 0; i < n; i++) {
         if (!solution.hasAnyQueenConflictsOn(i, currCol)) {
           solution.togglePiece(i, currCol);
-          console.log('Placed at row/col:', i, currCol);
           if (!recursiveFindSolution(currCol + 1)) {
             solution.togglePiece(i, currCol);
-            console.log('Removed at row/col:', i, currCol);
           }
         }
       }
