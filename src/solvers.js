@@ -17,8 +17,9 @@
   TIME COMPLEXITY OF SOLVER FUNCTIONS
   
   findNRooksSolution -- O(n) : linear
-  countNRooksSolution -- O(n) : linear
-  
+  countNRooksSolutions -- O(n) : linear
+  findNQueensSolution -- O(n^2) : quadratic
+  countNQueensSolutions -- O(n^2) : quadratic
 
 */
 
