@@ -53,7 +53,6 @@ window.findNQueensSolution = function(n) {
       return true;
     } else {
       for (var i = 0; i < n; i++) {
-        debugger;
         if (!solution.hasAnyQueenConflictsOn(i, currCol)) {
           solution.togglePiece(i, currCol);
           console.log('Placed at row/col:', i, currCol);
