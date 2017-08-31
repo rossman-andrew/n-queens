@@ -79,23 +79,30 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      var objInRow = 0;
       for (var i = 0; i < this.get('n'); i++) {
         if (this.get(rowIndex)[i] === 1) {
-          objInRow++;
-          if (objInRow >= 2) {
-            return true;
-          }
+          return true;
         }
       }
+
       return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      for (var i = 0; i < this.get('n'); i++) {
-        if (this.hasRowConflictAt(i)) {
+      var counter = 0;
+      for (var row = 0; row < this.get('n'); row++) {
+        //Searching through rows
+        for (var col = 0; col < this.get('n'); col++) {
+          //search through columns in rows
+          if (this.get(row)[col] === 1) {
+            counter++;
+          }
+        }
+        if (counter > 1) {
           return true;
+        } else {
+          counter = 0;
         }
       }
       return false;
@@ -108,13 +115,9 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      var objInCol = 0;
       for (var i = 0; i < this.get('n'); i++) {
         if (this.get(i)[colIndex] === 1) {
-          objInCol++;
-          if (objInCol >= 2) {
-            return true;
-          }
+          return true;
         }
       }
       return false;
@@ -122,9 +125,19 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      for (var i = 0; i < this.get('n'); i++) {
-        if (this.hasColConflictAt(i)) {
+      var counter = 0;
+      for (var col = 0; col < this.get('n'); col++) {
+        //Searching through rows
+        for (var row = 0; row < this.get('n'); row++) {
+          //search through columns in rows
+          if (this.get(row)[col] === 1) {
+            counter++;
+          }
+        }
+        if (counter > 1) {
           return true;
+        } else {
+          counter = 0;
         }
       }
       return false;
@@ -143,10 +156,11 @@
       
       while (currRow < this.get('n') && currCol < this.get('n')) {
         if (this.get(currRow)[currCol] === 1) {
-          objsFound++;
-          if (objsFound >= 2) {
-            return true;
-          }
+          // objsFound++;
+          // if (objsFound >= 2) {
+          //   return true;
+          // }
+          return true;
         }
         currRow++;
         currCol++;
@@ -160,9 +174,20 @@
       //There will be n - 3 diagonals to check
       // debugger;
       //First-row index: passing in a col index
-      for (var i = -(this.get('n') - 1); i < this.get('n') - 1; i++) {
-        if (this.hasMajorDiagonalConflictAt(i)) {
-          return true;
+      for (var i = -(this.get('n') - 2); i < this.get('n') - 1; i++) {
+        var currRow = 0;
+        var currCol = i;
+        var objsFound = 0;
+        
+        while (currRow < this.get('n') && currCol < this.get('n')) {
+          if (this.get(currRow)[currCol] === 1) {
+            objsFound++;
+            if (objsFound > 1) {
+              return true;
+            }
+          }
+          currRow++;
+          currCol++;
         }
       }
       return false;
@@ -177,14 +202,10 @@
     hasMinorDiagonalConflictAt: function(index) {
       var currRow = 0;
       var currCol = index;
-      var objsFound = 0;
       
       while (currRow < this.get('n') && currCol >= 0) {
         if (this.get(currRow)[currCol] === 1) {
-          objsFound++;
-          if (objsFound >= 2) {
-            return true;
-          }
+          return true;
         }
         currRow++;
         currCol--;
@@ -196,8 +217,21 @@
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
       for (var i = this.get('n') + 1; i > 0; i--) {
-        if (this.hasMinorDiagonalConflictAt(i)) {
-          return true;
+        // if (this.hasMinorDiagonalConflictAt(i)) {
+        //   return true;
+        // }
+        var currRow = 0;
+        var currCol = i;
+        var objsFound = 0;
+        while (currRow < this.get('n') && currCol >= 0) {
+          if (this.get(currRow)[currCol] === 1) {
+            objsFound++;
+            if (objsFound > 1) {
+              return true;
+            }
+          }
+          currRow++;
+          currCol--;
         }
       }
       return false;
